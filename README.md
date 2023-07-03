@@ -11,7 +11,7 @@ test -f ~/.ssh/id_ed25519 | ssh-keygen -t ed25519 -C "timothy@fastmail.com" -f ~
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Install Brew Packages
-brew install --cask anki sublime-text iterm2 hot monitorcontrol joplin transmission mark-text visual-studio-code firefox sabnzbd eloston-chromium && \
+brew install --cask anki sublime-text iterm2 hot monitorcontrol postman joplin transmission mark-text visual-studio-code firefox sabnzbd eloston-chromium && \
 brew install docker wget zsh neofetch htop 
 
 # Install Powerlevel10k theme - https://github.com/romkatv/homebrew-powerlevel10k

@@ -1,4 +1,6 @@
-# new_mac
+# Easy New Macbook Setup
+
+💻📡🔨🚀🔥
 
 
 ```bash

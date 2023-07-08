@@ -3,6 +3,7 @@
 💻📡🔨🚀🔥
 
 
+run as root
 ```bash
 #!/bin/bash
 

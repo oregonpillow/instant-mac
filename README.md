@@ -22,5 +22,19 @@ brew install romkatv/powerlevel10k/powerlevel10k && \
 echo 'source $(brew --prefix powerlevel10k)/powerlevel10k.zsh-theme' >>! ~/.zshrc && \
 brew update && brew upgrade
 
+# wipe current profile picture
+dscl . delete /Users/vader JPEGPhoto
+dscl . delete /Users/vader Picture
+
+wget "https://preview.redd.it/darth-vader-4k-wallpapers-v0-8tz0elrqg8ha1.png?width=3840&format=png&auto=webp&v=enabled&s=54789bcc0c45e3de810e7328af3412f5b558bf48" -O vader.png
+
+#set new profile picture
+sudo dscl . create /Users/vader Picture "/Users/vader/vader.png"
+
+wget "https://preview.redd.it/darth-vader-4k-wallpapers-v0-50cuytjqg8ha1.png?width=3840&format=png&auto=webp&v=enabled&s=eec0cbbd3ba5bc6fcfe3e5d37b7a1d6d9e3cba8e" -O vader2.png
+
+#set new wallpaper
+osascript -e 'tell application "Finder" to set desktop picture to POSIX file "/Users/vader/vader2.png"'
+
 
 ```

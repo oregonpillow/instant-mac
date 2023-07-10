@@ -15,7 +15,7 @@ test -f ~/.ssh/id_ed25519 | ssh-keygen -t ed25519 -C "timothy@fastmail.com" -f ~
 
 # Install Brew Packages
 brew install --cask anki bitwarden sublime-text iterm2 hot monitorcontrol postman joplin transmission mark-text visual-studio-code firefox sabnzbd eloston-chromium && \
-brew install docker htop btop neofetch wget zsh ansible yt-dlp
+brew install docker htop btop neofetch wget zsh ansible yt-dlp wireguard-tools
 
 # Install Powerlevel10k theme - https://github.com/romkatv/homebrew-powerlevel10k
 brew install romkatv/powerlevel10k/powerlevel10k && \

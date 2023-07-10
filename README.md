@@ -8,7 +8,7 @@ run as root
 #!/bin/bash
 
 # Create SSH Key
-test -f ~/.ssh/id_ed25519 | ssh-keygen -t ed25519 -C "timothy@fastmail.com" -f ~/.ssh/id_ed25519 -P ""
+test -f ~/.ssh/id_ed25519 | ssh-keygen -t ed25519 -C "vader" -f ~/.ssh/id_ed25519 -P ""
 
 # Install Brew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"

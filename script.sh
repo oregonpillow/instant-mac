@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#TODO: add plugins https://www.reddit.com/r/zsh/comments/13tv3if/question_what_are_the_best_plugins_for_zsh/
+
 
 # ===== VARIABLES =====
 USER="vader"          # mac username

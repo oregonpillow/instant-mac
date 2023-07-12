@@ -42,5 +42,5 @@ sudo dscl . create /Users/$USER Picture "/Users/$USER/profile_pic.png"
 wget $WALLPAPER_PIC_URL -O /Users/$USER/wallpaper_pic.png
 
 #set new wallpaper
-osascript -e 'tell application "Finder" to set desktop picture to POSIX file "/Users/$USER/wallpaper_pic.png"'
+#sudo osascript -e 'tell application "Finder" to set desktop picture to POSIX file "/Users/$USER/wallpaper_pic.png"'
 

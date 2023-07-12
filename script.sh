@@ -15,15 +15,21 @@ CASK_APPS="anki bitwarden sublime-text iterm2 hot monitorcontrol postman joplin 
 test -f ~/.ssh/id_ed25519 || ssh-keygen -t ed25519 -C $SSH_COMMENT -f ~/.ssh/id_ed25519 -P $SSH_PASSWORD
 
 # Install Brew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+test -f /usr/local/bin/brew || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Install Brew Packages
 brew install --cask $CASK_APPS && \
 brew install $BREW_APPS
 
-# Install Powerlevel10k theme - https://github.com/romkatv/homebrew-powerlevel10k
-brew install romkatv/powerlevel10k/powerlevel10k && \
-echo 'source $(brew --prefix powerlevel10k)/powerlevel10k.zsh-theme' >>! ~/.zshrc && \
+# Install Oh-My-ZSH + Powerlevel10k theme
+xcode-select --install
+printf "%s " "* Press enter to continue after xcode installed *"
+read ans
+rm -rf /Users/$USER/.oh-my-zsh
+sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" && \
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /Users/$USER/.oh-my-zsh/custom/themes/powerlevel10k && \
+sed -i '' 's/ZSH_THEME="robbyrussell"/ZSH_THEME="powerlevel10k\/powerlevel10k"/g' /Users/$USER/.zshrc
+
 brew update && brew upgrade
 
 # wipe current profile picture

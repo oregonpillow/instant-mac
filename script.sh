@@ -22,7 +22,7 @@ brew install --cask $CASK_APPS && \
 brew install $BREW_APPS
 
 # Install Oh-My-ZSH + Powerlevel10k theme
-test -f /usr/bin/xcodebuild || { xcode-select --install; printf "%s " "* Press enter to continue after xcode installed *" && read ans }
+test -f /usr/bin/xcodebuild || { xcode-select --install; printf "%s " "* Press enter to continue after xcode installed *" && read ans; }
 rm -rf /Users/$USER/.oh-my-zsh
 sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" && \
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /Users/$USER/.oh-my-zsh/custom/themes/powerlevel10k && \

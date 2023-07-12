@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #TODO: add plugins https://www.reddit.com/r/zsh/comments/13tv3if/question_what_are_the_best_plugins_for_zsh/
+#TODO: add emoji and cleaner log output
 
 
 # ===== VARIABLES =====
@@ -45,4 +46,7 @@ wget $WALLPAPER_PIC_URL -O /Users/$USER/wallpaper_pic.png
 
 #set new wallpaper
 #sudo osascript -e 'tell application "Finder" to set desktop picture to POSIX file "/Users/$USER/wallpaper_pic.png"'
+
+# enable firewall
+/usr/local/bin/m firewall enable
 

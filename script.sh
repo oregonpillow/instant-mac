@@ -4,6 +4,7 @@
 # ===== VARIABLES =====
 USER="vader"          # mac username
 SSH_PASSWORD=""       # optional
+SSH_COMMENT="MacbookPro"        # optional
 PROFILE_PIC_URL="https://preview.redd.it/darth-vader-4k-wallpapers-v0-8tz0elrqg8ha1.png?width=3840&format=png&auto=webp&v=enabled&s=54789bcc0c45e3de810e7328af3412f5b558bf48"
 WALLPAPER_PIC_URL="https://preview.redd.it/darth-vader-4k-wallpapers-v0-50cuytjqg8ha1.png?width=3840&format=png&auto=webp&v=enabled&s=eec0cbbd3ba5bc6fcfe3e5d37b7a1d6d9e3cba8e"
 BREW_APPS="docker htop btop neofetch wget zsh ansible yt-dlp wireguard-tools"         
@@ -11,7 +12,7 @@ CASK_APPS="anki bitwarden sublime-text iterm2 hot monitorcontrol postman joplin 
 # =====================
 
 # Create SSH Key
-test -f ~/.ssh/id_ed25519 || ssh-keygen -t ed25519 -C $USER -f ~/.ssh/id_ed25519 -P $SSH_PASSWORD
+test -f ~/.ssh/id_ed25519 || ssh-keygen -t ed25519 -C $SSH_COMMENT -f ~/.ssh/id_ed25519 -P $SSH_PASSWORD
 
 # Install Brew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"

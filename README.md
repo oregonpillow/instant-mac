@@ -4,5 +4,8 @@
 
 
 ```bash
-sudo bash script.sh
+bash script.sh
 ```
+
+**Tested on ✅**
+- Monterey 12.6.7 (21G651)

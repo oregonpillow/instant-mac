@@ -1,16 +1,24 @@
 #!/bin/bash
 
-cd ~
+
+# ===== VARIABLES =====
+USER="vader"          # mac username
+SSH_PASSWORD=""       # optional
+PROFILE_PIC_URL="https://preview.redd.it/darth-vader-4k-wallpapers-v0-8tz0elrqg8ha1.png?width=3840&format=png&auto=webp&v=enabled&s=54789bcc0c45e3de810e7328af3412f5b558bf48"
+WALLPAPER_PIC_URL="https://preview.redd.it/darth-vader-4k-wallpapers-v0-50cuytjqg8ha1.png?width=3840&format=png&auto=webp&v=enabled&s=eec0cbbd3ba5bc6fcfe3e5d37b7a1d6d9e3cba8e"
+BREW_APPS="docker htop btop neofetch wget zsh ansible yt-dlp wireguard-tools"         
+CASK_APPS="anki bitwarden sublime-text iterm2 hot monitorcontrol postman joplin transmission mark-text visual-studio-code firefox sabnzbd eloston-chromium"
+# =====================
 
 # Create SSH Key
-test -f ~/.ssh/id_ed25519 || ssh-keygen -t ed25519 -C "vader" -f ~/.ssh/id_ed25519 -P ""
+test -f ~/.ssh/id_ed25519 || ssh-keygen -t ed25519 -C $USER -f ~/.ssh/id_ed25519 -P $SSH_PASSWORD
 
 # Install Brew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Install Brew Packages
-brew install --cask anki bitwarden sublime-text iterm2 hot monitorcontrol postman joplin transmission mark-text visual-studio-code firefox sabnzbd eloston-chromium && \
-brew install docker htop btop neofetch wget zsh ansible yt-dlp wireguard-tools
+brew install --cask $CASK_APPS && \
+brew install $BREW_APPS
 
 # Install Powerlevel10k theme - https://github.com/romkatv/homebrew-powerlevel10k
 brew install romkatv/powerlevel10k/powerlevel10k && \
@@ -18,16 +26,16 @@ echo 'source $(brew --prefix powerlevel10k)/powerlevel10k.zsh-theme' >>! ~/.zshr
 brew update && brew upgrade
 
 # wipe current profile picture
-dscl . delete /Users/vader JPEGPhoto
-dscl . delete /Users/vader Picture
+dscl . delete /Users/$USER JPEGPhoto
+dscl . delete /Users/$USER Picture
 
-wget "https://preview.redd.it/darth-vader-4k-wallpapers-v0-8tz0elrqg8ha1.png?width=3840&format=png&auto=webp&v=enabled&s=54789bcc0c45e3de810e7328af3412f5b558bf48" -O vader.png
+wget $PROFILE_PIC_URL -O profile_pic.png
 
 #set new profile picture
-sudo dscl . create /Users/vader Picture "/Users/vader/vader.png"
+sudo dscl . create /Users/$USER Picture "/Users/$USER/profile_pic.png"
 
-wget "https://preview.redd.it/darth-vader-4k-wallpapers-v0-50cuytjqg8ha1.png?width=3840&format=png&auto=webp&v=enabled&s=eec0cbbd3ba5bc6fcfe3e5d37b7a1d6d9e3cba8e" -O vader2.png
+wget $WALLPAPER_PIC_URL -O wallpaper_pic.png
 
 #set new wallpaper
-osascript -e 'tell application "Finder" to set desktop picture to POSIX file "/Users/vader/vader2.png"'
+osascript -e 'tell application "Finder" to set desktop picture to POSIX file "/Users/$USER/wallpaper_pic.png"'
 

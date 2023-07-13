@@ -4,6 +4,9 @@
 #Check xcode installed
 xcode-select --print-path &> /dev/null || { echo "*** Script requires xcode tools to be installed. Run 'xcode-select --install' ***" && exit 1; }
 
+#Check user is not root
+if [ "$EUID" -eq 0 ]; then echo "*** Please don't run script as root. You will be prompted for sudo password when needed ***" ; exit 1; fi
+
 # ===== VARIABLES =====
 USER=$(whoami)
 SSH_COMMENT="$(whoami)@$(hostname)"

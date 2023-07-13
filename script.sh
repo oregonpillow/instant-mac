@@ -41,7 +41,7 @@ sudo dscl . create /Users/$USER Picture "/Users/$USER/profile_pic.png"
 
 #set wallpaper
 wget $WALLPAPER_PIC_URL -O /Users/$USER/wallpaper_pic.png
-sudo osascript -e 'tell application "Finder" to set desktop picture to POSIX file "/Users/$USER/wallpaper_pic.png"'
+sudo osascript -e 'tell application "System Events" to tell every desktop to set picture to "/Users/$USER/wallpaper_pic.png" as POSIX file'
 
 # enable firewall
 sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 1

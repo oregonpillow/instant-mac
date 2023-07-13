@@ -33,20 +33,16 @@ sed -i '' 's/ZSH_THEME=.*/ZSH_THEME="powerlevel10k\/powerlevel10k"/' /Users/$USE
 
 brew update && brew upgrade
 
-# wipe current profile picture
+# set profile picture
 sudo dscl . delete /Users/$USER JPEGPhoto
 sudo dscl . delete /Users/$USER Picture
-
 wget $PROFILE_PIC_URL -O /Users/$USER/profile_pic.png
-
-#set new profile picture
 sudo dscl . create /Users/$USER Picture "/Users/$USER/profile_pic.png"
 
+#set wallpaper
 wget $WALLPAPER_PIC_URL -O /Users/$USER/wallpaper_pic.png
-
-#set new wallpaper
-#sudo osascript -e 'tell application "Finder" to set desktop picture to POSIX file "/Users/$USER/wallpaper_pic.png"'
+sudo osascript -e 'tell application "Finder" to set desktop picture to POSIX file "/Users/$USER/wallpaper_pic.png"'
 
 # enable firewall
-/usr/local/bin/m firewall enable
+sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 1
 

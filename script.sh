@@ -1,48 +1,35 @@
 #!/bin/bash
 
-#TODO: add plugins https://www.reddit.com/r/zsh/comments/13tv3if/question_what_are_the_best_plugins_for_zsh/
-#TODO: add emoji and cleaner log output
 
+#Check xcode installed
+xcode-select --print-path &> /dev/null || { echo "*** Script requires xcode tools to be installed. Run 'xcode-select --install' ***" && exit 1; }
 
 # ===== VARIABLES =====
-USER="vader"          # mac username
-SSH_PASSWORD=""       # optional
-SSH_COMMENT="MacbookPro"        # optional
-PROFILE_PIC_URL="https://preview.redd.it/darth-vader-4k-wallpapers-v0-8tz0elrqg8ha1.png?width=3840&format=png&auto=webp&v=enabled&s=54789bcc0c45e3de810e7328af3412f5b558bf48"
-WALLPAPER_PIC_URL="https://preview.redd.it/darth-vader-4k-wallpapers-v0-50cuytjqg8ha1.png?width=3840&format=png&auto=webp&v=enabled&s=eec0cbbd3ba5bc6fcfe3e5d37b7a1d6d9e3cba8e"
+USER=$(whoami)
+SSH_COMMENT="$(whoami)@$(hostname)"
 BREW_APPS="docker tmux m-cli htop btop neofetch wget zsh ansible yt-dlp wireguard-tools"         
 CASK_APPS="anki raycast bitwarden sublime-text iterm2 hot monitorcontrol postman joplin transmission mark-text visual-studio-code firefox sabnzbd eloston-chromium"
 # =====================
 
 # Create SSH Key
-test -f ~/.ssh/id_ed25519 || ssh-keygen -t ed25519 -C $SSH_COMMENT -f ~/.ssh/id_ed25519 -P $SSH_PASSWORD
+test -f ~/.ssh/id_ed25519 || ssh-keygen -t ed25519 -C $SSH_COMMENT -f ~/.ssh/id_ed25519 -P ""
 
 # Install Brew
-test -f /usr/local/bin/brew || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+test -f /usr/local/bin/brew && brew update --quiet && brew upgrade --quiet
+test -f /usr/local/bin/brew || NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Install Brew Packages
-brew install --cask $CASK_APPS && \
-brew install $BREW_APPS
+brew install --cask --quiet $CASK_APPS && brew install --quiet $BREW_APPS
 
-# Install Oh-My-ZSH + Powerlevel10k theme
-test -f /usr/bin/xcodebuild || { xcode-select --install; printf "%s " "* Press enter to continue after xcode installed *" && read ans; }
-rm -rf /Users/$USER/.oh-my-zsh
-sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --unattended" && \
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /Users/$USER/.oh-my-zsh/custom/themes/powerlevel10k && \
-sed -i '' 's/ZSH_THEME=.*/ZSH_THEME="powerlevel10k\/powerlevel10k"/' /Users/$USER/.zshrc
+# Install Oh-My-ZSH 
+test -f /Users/$USER/.oh-my-zsh || sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --unattended"
 
-brew update && brew upgrade
-
-# set profile picture
-sudo dscl . delete /Users/$USER JPEGPhoto
-sudo dscl . delete /Users/$USER Picture
-wget $PROFILE_PIC_URL -O /Users/$USER/profile_pic.png
-sudo dscl . create /Users/$USER Picture "/Users/$USER/profile_pic.png"
-
-#set wallpaper
-wget $WALLPAPER_PIC_URL -O /Users/$USER/wallpaper_pic.png
-sudo osascript -e 'tell application "System Events" to tell every desktop to set picture to "/Users/$USER/wallpaper_pic.png" as POSIX file'
+# Install Powerlevel10k theme
+test -f /Users/$USER/.oh-my-zsh/custom/themes/powerlevel10k || \
+  { git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /Users/$USER/.oh-my-zsh/custom/themes/powerlevel10k && \
+    sed -i '' 's/ZSH_THEME=.*/ZSH_THEME="powerlevel10k\/powerlevel10k"/' /Users/$USER/.zshrc; }
 
 # enable firewall
-sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 1
+/usr/libexec/ApplicationFirewall/socketfilterfw --getglobalstate | grep "Firewall is enabled. (State = 1)" || \
+  sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 1
 

@@ -3,9 +3,6 @@
 
 set -e
 
-
-echo "🤓  Running Instant Mac Script..."
-
 # ===== VARIABLES =====
 SSH_COMMENT="${USER}@$(hostname)"
 BREW_APPS="docker tmux m-cli htop btop neofetch wget zsh ansible yt-dlp wireguard-tools"         
@@ -16,10 +13,10 @@ i=0
 #Check xcode installed
 xcode-select --print-path &> /dev/null || { echo "⚠️  Script requires xcode tools to be installed. Run 'xcode-select --install'" && exit 1; }
 
-
 #Check user is not root
 if [ "$EUID" -eq 0 ]; then echo "⚠️  Please don't run directly as root. Use 'bash script.sh'" ; exit 1; fi
 
+echo "🤓  Running Instant Mac Script..."
 
 # 1. Create SSH Key
 test -f ~/.ssh/id_ed25519 || \

@@ -20,7 +20,7 @@ test -f ~/.ssh/id_ed25519 || ssh-keygen -t ed25519 -C $SSH_COMMENT -f ~/.ssh/id_
 
 # Install Brew
 test -f /usr/local/bin/brew && brew update --quiet && brew upgrade --quiet
-test -f /usr/local/bin/brew || NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+test -f /usr/local/bin/brew || NONINTERACTIVE=1 sudo /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Install Brew Packages
 brew install --cask --quiet $CASK_APPS && brew install --quiet $BREW_APPS

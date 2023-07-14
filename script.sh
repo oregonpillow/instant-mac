@@ -27,7 +27,7 @@ test -f ~/.ssh/id_ed25519 || \
 test -f /usr/local/bin/brew && brew update --quiet && brew upgrade --quiet
 test -f /usr/local/bin/brew || \
   { echo -e "\n========== INSTALLING Brew... ==========" && \
-    sudo -u $USER NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && \
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && \
       brew analytics off; }
 
 

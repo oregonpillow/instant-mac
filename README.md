@@ -12,7 +12,7 @@ Simply a script that I can execute on any new mac system to get me up and runnin
 - ✅ Enables MacOS Firewall
 
 ```bash
-bash script.sh
+bash ignition.sh
 ```
 
 **Tested on ✅**

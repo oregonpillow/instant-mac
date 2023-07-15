@@ -16,7 +16,8 @@ xcode-select --print-path &> /dev/null || { echo "⚠️  Script requires xcode 
 #Check user is not root
 if [ "$EUID" -eq 0 ]; then echo "⚠️  Please don't run directly as root. Use 'bash script.sh'" ; exit 1; fi
 
-echo "🤓  Running Instant Mac Script..."
+echo "👌  Preflight checks complete"
+echo "🤓  Initiating Instant Mac Script..."
 
 # 1. Create SSH Key
 test -f ~/.ssh/id_ed25519 || \
@@ -39,11 +40,11 @@ test -f /usr/local/bin/brew || \
                   i=$((i+1)); }
 
 
-# 3. Install Oh-My-ZSH 
+# 3. Install Oh-My-Zsh 
 [ -d /Users/$USER/.oh-my-zsh ] || \
-  { echo -e "\n💻  Installing Oh-My-ZSH" && \
+  { echo -e "\n💻  Installing Oh-My-Zsh" && \
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --unattended" &> /dev/null && \
-      echo "✅  Oh-My-ZSH Installed Successfully" && \
+      echo "✅  Oh-My-Zsh Installed Successfully" && \
         i=$((i+1)); }
 
 
@@ -75,6 +76,8 @@ if [ $i -eq 5 ]; then
   echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥" && sleep 1
   echo "🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀" && sleep 1
   echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+elif [ $i -eq 0 ]; then
+  echo -e "\n\n\n 👍👍👍 Looks like everything is already done"
 else
-  echo -e "😬😬😬  Not everything completed successfully"
+  echo -e "\n\n\n😬😬😬  Not everything completed successfully"
 fi

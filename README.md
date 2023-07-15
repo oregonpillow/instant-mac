@@ -12,7 +12,7 @@ Simply a script that I can execute on any new mac system to get me up and runnin
 - ✅ Enables MacOS Firewall
 
 ```bash
-bash ignition.sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/oregonpillow/instant-mac/master/ignition.sh)"
 ```
 
 **Tested on ✅**

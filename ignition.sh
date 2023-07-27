@@ -5,8 +5,8 @@ set -e
 
 # ===== VARIABLES =====
 SSH_COMMENT="${USER}@$(hostname)"
-BREW_APPS="docker tmux m-cli htop btop neofetch wget zsh ansible yt-dlp wireguard-tools mpv"         
-CASK_APPS="anki raycast bitwarden sublime-text iterm2 hot monitorcontrol postman joplin transmission mark-text visual-studio-code firefox sabnzbd eloston-chromium"
+BREW_APPS="tmux m-cli htop btop neofetch wget zsh ansible yt-dlp wireguard-tools mpv"         
+CASK_APPS="anki docker raycast bitwarden sublime-text iterm2 hot monitorcontrol postman joplin transmission mark-text visual-studio-code firefox sabnzbd eloston-chromium"
 # =====================
 i=0
 

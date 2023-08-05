@@ -6,7 +6,7 @@ set -e
 # ===== VARIABLES =====
 SSH_COMMENT="${USER}@$(hostname)"
 BREW_APPS="tmux m-cli htop btop neofetch wget zsh ansible yt-dlp wireguard-tools mpv"         
-CASK_APPS="anki docker rectangle raycast bitwarden spotify sublime-text iterm2 hot monitorcontrol postman joplin transmission mark-text vscodium firefox sabnzbd eloston-chromium"
+CASK_APPS="anki docker rectangle raycast bitwarden spotify sublime-text iterm2 hot monitorcontrol postman joplin transmission mark-text vscodium librewolf sabnzbd eloston-chromium"
 # =====================
 i=0
 
@@ -34,8 +34,8 @@ test -f /usr/local/bin/brew || \
       brew analytics off && \
         echo "✅  Brew Installed Successfully" && \
           echo -e "\n💻  Installing Brew Packages" && \
-            brew install --quiet $BREW_APPS && \
-              brew install --cask --quiet $CASK_APPS && \
+            brew install --no-quarantine --quiet $BREW_APPS && \
+              brew install --no-quarantine --cask --quiet $CASK_APPS && \
                 echo "✅  Brew Packages Installed Successfully" && \
                   i=$((i+1)); }
 

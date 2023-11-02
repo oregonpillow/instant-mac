@@ -6,9 +6,12 @@ set -e
 # ===== VARIABLES =====
 SSH_COMMENT="${USER}@$(hostname)"
 BREW_APPS="tmux asciinema m-cli htop btop neofetch wget zsh ansible yt-dlp wireguard-tools mpv aicommits restic wifi-password"         
-CASK_APPS="anki tabby skype tunnelblick docker rectangle raycast bitwarden spotify sublime-text iterm2 hot monitorcontrol postman joplin transmission-remote-gui mark-text visual-studio-code librewolf sabnzbd eloston-chromium microsoft-remote-desktop"
+CASK_APPS="anki tabby skype tunnelblick docker rectangle raycast bitwarden spotify sublime-text iterm2 hot monitorcontrol postman joplin transmission-remote-gui mark-text visual-studio-code librewolf sabnzbd eloston-chromium microsoft-remote-desktop amethyst oversight"
 # =====================
 i=0
+
+# Disable Mission Control "Automatically rearrange Spaces based on most recent use", since it conflicts with amethyst
+defaults write com.apple.dock "mru-spaces" -bool "false" && killall Dock
 
 #Check xcode installed
 xcode-select --print-path &> /dev/null || { echo "⚠️  Script requires xcode tools to be installed. Run 'xcode-select --install'" && exit 1; }

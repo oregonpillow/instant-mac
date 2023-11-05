@@ -19,7 +19,6 @@ xcode-select --print-path &> /dev/null || { echo "⚠️  Script requires xcode 
 if [ "$EUID" -eq 0 ]; then echo "⚠️  Please don't run directly as root. Use 'bash script.sh'" ; exit 1; fi
 
 echo "👌  Preflight checks complete"
-echo "🤓  Hold on tight..."
 
 # 1. Create SSH Key
 test -f ~/.ssh/id_ed25519 || \

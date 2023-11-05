@@ -69,4 +69,7 @@ test -f /usr/local/bin/brew || \
               sudo systemsetup -setwakeonnetworkaccess on > /dev/null 2>&1 && sudo systemsetup -getwakeonnetworkaccess | grep --silent "Wake On Network Access: On" && \
                 echo "✅  Wake-on-Network Enabled Successfully" && \
                   sudo scutil --set HostName $HOSTNAME && sudo scutil --get HostName | grep --silent $HOSTNAME && \
-                    echo "✅  Hostname Updated Successfully"; }
+                    sudo scutil --set LocalHostName $HOSTNAME && sudo scutil --get LocalHostName | grep --silent $HOSTNAME && \
+                      sudo scutil --set ComputerName $HOSTNAME && sudo scutil --get ComputerName | grep --silent $HOSTNAME && \
+                        sudo dscacheutil -flushcache && \
+                          echo "✅  Hostname Updated Successfully"; }

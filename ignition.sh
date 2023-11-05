@@ -4,7 +4,7 @@
 set -e
 
 # ===== VARIABLES =====
-HOSTNAME=macbook"
+HOSTNAME="macbook"
 SSH_COMMENT="${USER}@$HOSTNAME"
 BREW_APPS="tmux asciinema m-cli htop btop neofetch wget zsh ansible yt-dlp wireguard-tools mpv aicommits restic wifi-password"         
 CASK_APPS="anki tabby skype tunnelblick docker rectangle raycast bitwarden spotify sublime-text iterm2 hot monitorcontrol postman joplin transmission-remote-gui mark-text visual-studio-code librewolf sabnzbd eloston-chromium microsoft-remote-desktop amethyst oversight betterdisplay alt-tab unclack mic-drop pomatez"
@@ -68,5 +68,5 @@ test -f /usr/local/bin/brew || \
             echo "✅  SSH Server Enabled Successfully" && \
               sudo systemsetup -setwakeonnetworkaccess on > /dev/null 2>&1 && sudo systemsetup -getwakeonnetworkaccess | grep --silent "Wake On Network Access: On" && \
                 echo "✅  Wake-on-Network Enabled Successfully" && \
-                  sudo systemsetup -setcomputername $HOSTNAME > /dev/null 2>&1 && sudo systemsetup -getcomputername | grep --silent "Computer Name: $HOSTNAME" && \
+                  sudo scutil --set HostName $HOSTNAME && sudo scutil --get HostName | grep --silent $HOSTNAME && \
                     echo "✅  Hostname Updated Successfully"; }

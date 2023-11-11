@@ -7,7 +7,7 @@ set -e
 HOSTNAME="macbook"
 SSH_COMMENT="${USER}@$HOSTNAME"
 BREW_APPS="tmux asciinema m-cli htop btop neofetch wget zsh ansible yt-dlp wireguard-tools mpv aicommits restic wifi-password"         
-CASK_APPS="anki tabby skype tunnelblick docker rectangle raycast bitwarden spotify sublime-text iterm2 hot monitorcontrol postman joplin transmission-remote-gui mark-text visual-studio-code librewolf sabnzbd eloston-chromium microsoft-remote-desktop amethyst oversight betterdisplay alt-tab unclack mic-drop pomatez"
+CASK_APPS="anki tabby skype tunnelblick docker rectangle raycast bitwarden spotify sublime-text iterm2 hot monitorcontrol postman joplin transmission-remote-gui mark-text visual-studio-code librewolf sabnzbd eloston-chromium microsoft-remote-desktop amethyst oversight betterdisplay alt-tab unclack mic-drop openvpn-connect pomatez"
 # =====================
 
 # Disable Mission Control "Automatically rearrange Spaces based on most recent use", since it conflicts with amethyst

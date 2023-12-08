@@ -40,7 +40,8 @@ test -f /usr/local/bin/brew || \
           echo -e "\n💻  Installing Brew Packages" && \
             brew install --no-quarantine --quiet $BREW_APPS && \
               brew install --no-quarantine --cask --quiet $CASK_APPS && \
-                echo "✅  Brew Packages Installed Successfully"; }
+                brew tap homebrew/cask-fonts && brew install font-hack-nerd-font && \
+                  echo "✅  Brew Packages Installed Successfully"; }
 
 
 # 3. Install Oh-My-Zsh 

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# this script will remove all blank lines or lines starting with '#' - it replaces the original file!
+# takes file path as argument e.g. 'remove-comments.sh <my file to be cleaned>'
+
+grep -Ev "^[[:blank:]]*(#|$)" $1 > "$1".tmp && rm "$1" && mv "$1".tmp $1

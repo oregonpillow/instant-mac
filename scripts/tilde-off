@@ -1,0 +1,5 @@
+#!/opt/homebrew/bin/zsh
+
+{ launchctl unload ~/Library/LaunchAgents/com.user.loginscript.plist && \
+sudo rm ~/Library/LaunchAgents/com.user.loginscript.plist; } && \
+echo "reboot to take effect"

@@ -2,18 +2,20 @@
 
 # dependencies: brew install blueutil
 
-# https://apple.stackexchange.com/questions/219885/use-caffeinate-to-prevent-sleep-on-lid-close-on-battery
-
-# collect status
+# collect statuses
 CLAMCLOSED=$(/usr/sbin/ioreg -r -k AppleClamshellState -d 4 | grep -q '"AppleClamshellState" = Yes' && echo "true" || echo "false")
 BLUEOFF=$(/usr/sbin/system_profiler SPBluetoothDataType | grep -q "State: Off" && echo "true" || echo "false")
 WIFIOFF=$(/usr/sbin/networksetup -getairportpower en0 | grep -q "Wi-Fi Power (en0): Off" && echo "true" || echo "false")
 MUTED=$(/usr/bin/osascript -e "output muted of (get volume settings)")
+SLEEPOFF=$(sudo pmset -g | grep "SleepDisabled" | grep -q -o -E '[1]' && echo "true" || echo "false")
 
 # disable sleep, otherwise script will not run when state is: battery + clamshell
-sudo /usr/bin/pmset -b disablesleep 1
+# *** this also means  you should close the lid when on battery and want to enable sleep ***
+if [ $SLEEPOFF = "false" ]; then
+  sudo /usr/bin/pmset -b disablesleep 1
+fi
 
-    
+
 if [ $CLAMCLOSED = "true" ]; then
 
   # disable bluetooth
@@ -31,7 +33,7 @@ if [ $CLAMCLOSED = "true" ]; then
     /usr/bin/osascript -e "set volume with output muted"
   fi
 
-  # enable sleep
+  # re-enable sleep mode
   sudo /usr/bin/pmset -b disablesleep 0
 
 fi

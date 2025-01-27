@@ -39,7 +39,7 @@ which ansible > /dev/null 2>&1 && echo "✅  Ansible already Installed" \
 # Use ansible for the rest
 cd ansible
 #ansible-galaxy install -r requirements.yml
-ansible-playbook -e "ansible_become_password=$MY_PASSWORD" -i inventory.yml main.yml
+ansible-playbook -e "ansible_become_password=$MY_PASSWORD" main.yml
 
 # Install dotfiles
 echo "🔧  Installing dotfiles

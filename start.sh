@@ -42,8 +42,9 @@ cd ansible
 ansible-playbook -e "ansible_become_password=$MY_PASSWORD" main.yml
 
 # Install dotfiles
-echo "🔧  Installing dotfiles
-yadm clone --no-bootstrap https://github.com/oregonpillow/dotfiles.git && \
+echo "🔧  Installing dotfiles"
+cd $HOME
+yadm clone -f --no-bootstrap https://github.com/oregonpillow/dotfiles.git && \
 yadm decrypt
 
 # Switch from HTTPS to SSH

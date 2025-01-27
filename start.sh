@@ -41,19 +41,27 @@ cd ansible
 #ansible-galaxy install -r requirements.yml
 ansible-playbook -e "ansible_become_password=$MY_PASSWORD" main.yml
 
+# re-source environment
+source ~/.zshrc
+source ~/.zprofile
+echo "✅ Environment re-sourced"
+
 # Install dotfiles
 echo "🔧  Installing dotfiles"
 cd $HOME
 yadm clone -f --no-bootstrap https://github.com/oregonpillow/dotfiles.git && \
-yadm decrypt
+# Pause section
+echo "Press Enter to decrypt sensitive config files..."
+read
+yadm decrypt || { echo "⚠️  Failed to decrypt config files. Exiting..." && exit 1; }
 
 # Switch from HTTPS to SSH
 yadm remote set-url origin "git@github.com:oregonpillow/dotfiles.git" && \
-echo "✅ Updated 'dotfiles' repo to SSH"
+echo "✅ Updated 'oregonpillow/dotfiles.git' repo to SSH to Authentication"
 
 cd instant-mac
 git remote set-url origin "git@github.com:oregonpillow/instant-mac.git" && \
-echo "✅ Updated 'instant-mac' repo to SSH"
+echo "✅ Updated 'oregonpillow/instant-mac.git' repo to SSH Authentication"
 
 # execution time
 END_TIME="$(date)"

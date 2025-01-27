@@ -191,6 +191,7 @@ formulae:
   - pnpm
   - poppler
   - popt
+  - powerlevel10k
   - prettier
   - prettyping
   - pyenv

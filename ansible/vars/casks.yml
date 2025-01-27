@@ -1,7 +1,6 @@
 # created with: `brew list --casks | xargs | yq e '{"casks": split(" ")}' > casks.yml`
 casks:
   - alt-tab
-  - amethyst
   - anki
   - background-music
   - balenaetcher
@@ -10,6 +9,7 @@ casks:
   - bitwarden
   - docker
   - firefox
+  - font-hack-nerd-font
   - font-symbols-only-nerd-font
   - handbrake
   - iterm2

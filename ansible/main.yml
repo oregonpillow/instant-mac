@@ -1,7 +1,8 @@
 ---
-# main playbook
-- name: Configure host.
-  hosts: all
+- name: Instant Mac Setup
+  hosts: localhost
+  connection: local
+  gather_facts: yes
   tasks:
     - name: Include all variable files
       include_vars:
@@ -10,48 +11,28 @@
     # HOMEBREW
     - name: Install brew taps
       community.general.homebrew_tap:
-        name: "{{ item }}"
+        name: "{{ taps }}"
+        state: present
       ignore_errors: yes
-      loop: "{{ taps }}"
 
     - name: Install brew formulae
       community.general.homebrew:
-        name: "{{ item }}"
+        name: "{{ formulae }}"
         state: present
         update_homebrew: true
         upgrade_all: false
         install_options: no-quarantine
       ignore_errors: yes
-      loop: "{{ formulae }}"
 
     - name: Install brew casks
       community.general.homebrew_cask:
-        name: "{{ item }}"
+        name: "{{ casks }}"
         state: present
         update_homebrew: false
         upgrade_all: false
         install_options: no-quarantine
         sudo_password: "{{ ansible_become_password }}"
       ignore_errors: yes
-      loop: "{{ casks }}"
-
-    # https://www.nerdfonts.com/
-    - name: Collect nerd font names
-      shell: brew search '/font-.*-nerd-font/' | awk '{ print $1 }' | xargs
-      register: nerd_fonts
-      changed_when: false
-
-    # https://gist.github.com/davidteren/898f2dcccd42d9f8680ec69a3a5d350e
-    - name: Install nerd fonts
-      community.general.homebrew_cask:
-        name: "{{ item }}"
-        state: present
-        update_homebrew: false
-        upgrade_all: false
-        install_options: no-quarantine
-        sudo_password: "{{ ansible_become_password }}"
-      ignore_errors: yes
-      loop: "{{ nerd_fonts.stdout | split }}"
 
     # SYSTEM PREFERENCES
     - name: Disable natural trackpad scrolling
@@ -62,34 +43,17 @@
         value: false
         state: present
 
-    # conflicts with app: amethyst
-    # - name: Disable Mission Control "Automatic Spaces rearrangement"
-    #   community.general.osx_defaults:
-    #     domain: com.apple.dock
-    #     key: mru-spaces
-    #     type: bool
-    #     value: false
-    #     state: present
-
-    - name: Check Oh My Zsh install status
+    - name: Check oh-my-zsh  install state
       shell: test -d ~/.oh-my-zsh
       register: oh_my_zsh_installed
       changed_when: false
       failed_when: oh_my_zsh_installed.rc not in [0, 1]
 
-    - name: Install Oh My Zsh
+    - name: Install oh-my-zsh
       shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
       when: oh_my_zsh_installed.rc != 0
 
-    - name: Install Powerlevel10k
-      community.general.homebrew:
-        name: powerlevel10k
-        state: present
-        update_homebrew: true
-        upgrade_all: false
-        install_options: no-quarantine
-
-    - name: Check Powerlevel10k config status
+    - name: Check powerlevel10k config state
       shell: grep --silent "source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme" ~/.zshrc
       register: powerlevel10k_set
       failed_when: powerlevel10k_set.rc not in [0, 1]

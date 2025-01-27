@@ -9,7 +9,6 @@ if [ "$EUID" -eq 0 ]; then
   exit 1
 fi
 
-echo "👌  Preflight checks complete"
 START_TIME="$(date)"
 
 # Prompt for password - needed for some ansible tasks and to install brew
@@ -41,6 +40,15 @@ which ansible > /dev/null 2>&1 && echo "✅  Ansible already Installed" \
 cd ansible
 #ansible-galaxy install -r requirements.yml
 ansible-playbook -e "ansible_become_password=$MY_PASSWORD" -i inventory.yml main.yml
+
+# Install dotfiles
+echo "🔧  Installing dotfiles
+yadm clone --no-bootstrap https://github.com/oregonpillow/dotfiles.git && \
+yadm decrypt
+
+# Switch from HTTPS to SSH
+yadm remote set-url origin "git@github.com:oregonpillow/dotfiles.git" && \
+echo "✅ Updated yadm git remote to SSH"
 
 # execution time
 END_TIME="$(date)"

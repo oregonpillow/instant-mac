@@ -29,6 +29,7 @@ formulae:
   - cmatrix
   - confuse
   - coreutils
+  - cowsay
   - csshx
   - curl
   - dav1d

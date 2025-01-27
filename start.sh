@@ -49,7 +49,11 @@ yadm decrypt
 
 # Switch from HTTPS to SSH
 yadm remote set-url origin "git@github.com:oregonpillow/dotfiles.git" && \
-echo "✅ Updated yadm git remote to SSH"
+echo "✅ Updated 'dotfiles' repo to SSH"
+
+cd instant-mac
+git remote set-url origin "git@github.com:oregonpillow/instant-mac.git" && \
+echo "✅ Updated 'instant-mac' repo to SSH"
 
 # execution time
 END_TIME="$(date)"

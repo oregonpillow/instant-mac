@@ -63,6 +63,17 @@ cd instant-mac
 git remote set-url origin "git@github.com:oregonpillow/instant-mac.git" && \
 echo "✅ Updated 'oregonpillow/instant-mac.git' repo to SSH Authentication"
 
+# Set iTerm2 config
+system_type=$(uname -s)
+if [ "$system_type" = "Darwin" ]; then
+  # possibly add something here to ensure iTerm2 is installed using Homebrew
+  # cask like in the previous example
+  if [ -d "$HOME/.iterm2" ]; then
+    echo "Setting iTerm preference folder"
+    defaults write com.googlecode.iterm2 PrefsCustomFolder "$HOME/.iterm2"
+  fi
+fi
+
 # execution time
 END_TIME="$(date)"
 echo "🕒  Script started at: $START_TIME"

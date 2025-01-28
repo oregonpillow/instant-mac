@@ -17,6 +17,11 @@ export MY_PASSWORD
 # this is needed to init a sudo session
 echo $MY_PASSWORD | sudo -S echo "🔑  sudo session started"
 
+
+# Change Finder Settings 
+defaults write com.apple.finder AppleShowAllFiles true && killall Finder
+
+
 # Install Brew
 { test -f /opt/homebrew/bin/brew && echo "✅  Brew already Installed"; } \
   || { echo -e "\n💻  Installing Brew" \
@@ -40,6 +45,10 @@ which ansible > /dev/null 2>&1 && echo "✅  Ansible already Installed" \
 cd ansible
 #ansible-galaxy install -r requirements.yml
 ansible-playbook -e "ansible_become_password=$MY_PASSWORD" main.yml
+
+
+# Install oh-my-zsh (needs zsh, should be installed after brew zsh installed)
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --unattended"
 
 # re-source brew environment
 eval "$(/opt/homebrew/bin/brew shellenv)" && echo "✅Homebrew Environment re-sourced"

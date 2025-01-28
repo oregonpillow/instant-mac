@@ -18,10 +18,6 @@ export MY_PASSWORD
 echo $MY_PASSWORD | sudo -S echo "🔑  sudo session started"
 
 
-# Change Finder Settings 
-defaults write com.apple.finder AppleShowAllFiles true && killall Finder
-
-
 # Install Brew
 { test -f /opt/homebrew/bin/brew && echo "✅  Brew already Installed"; } \
   || { echo -e "\n💻  Installing Brew" \
@@ -43,20 +39,24 @@ which ansible > /dev/null 2>&1 && echo "✅  Ansible already Installed" \
 
 # Use ansible for the rest
 cd ansible
-#ansible-galaxy install -r requirements.yml
 ansible-playbook -e "ansible_become_password=$MY_PASSWORD" main.yml
 
 # re-source brew environment
-eval "$(/opt/homebrew/bin/brew shellenv)" && echo "✅Homebrew Environment re-sourced"
+eval "$(/opt/homebrew/bin/brew shellenv)" && echo "✅ Homebrew Environment re-sourced"
 
+# Switch git from HTTPS to SSH
+git remote set-url origin "git@github.com:oregonpillow/instant-mac.git" && \
+echo "✅ Updated 'oregonpillow/instant-mac.git' repo to SSH Authentication"
 
-## restore git to SSH here....
+cd $HOME
+
+yadm remote set-url origin "git@github.com:oregonpillow/dotfiles.git" && \
+echo "✅ Updated 'oregonpillow/dotfiles.git' repo to SSH to Authentication"
+
 
 # Write iTerm conf
 defaults write com.googlecode.iterm2 PrefsCustomFolder "$HOME/.iterm2"
 defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder true
-
-# execution time
-END_TIME="$(date)"
-echo "🕒  Script started at: $START_TIME"
-echo "🕒  Script ended at: $END_TIME"
+defaults write -g com.apple.swipescrolldirection -bool false
+defaults write com.apple.finder AppleShowAllFiles true && killall Finder
+echo $MY_PASSWORD | sudo -S reboot > /dev/null 2>&1

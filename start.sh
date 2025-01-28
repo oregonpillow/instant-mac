@@ -41,10 +41,8 @@ cd ansible
 #ansible-galaxy install -r requirements.yml
 ansible-playbook -e "ansible_become_password=$MY_PASSWORD" main.yml
 
-# re-source environment
-source ~/.zshrc
-source ~/.zprofile
-echo "✅ Environment re-sourced"
+# re-source brew environment
+eval "$(/opt/homebrew/bin/brew shellenv)" && echo "✅Homebrew Environment re-sourced"
 
 # Install dotfiles
 echo "🔧  Installing dotfiles"
